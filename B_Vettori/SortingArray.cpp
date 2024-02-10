@@ -52,7 +52,6 @@ void stampaVettore(string v[], int l ) {
     cout << endl;
 }
 
-/*
 int bubbleSort(string v[], int l ) {
     int numOp = 0;
     string tmp;
@@ -71,7 +70,7 @@ int bubbleSort(string v[], int l ) {
     }
     return numOp;
 }
-*/
+
 
 int main(){
     ifstream f;
@@ -91,12 +90,28 @@ int main(){
     for (int i=0; i<n; i++) getline( f, vs[i] );
 
     stampaVettore(vs, n);
-    //int x = bubbleSort(vs, n);
-    quickSort(vs, 0, n-1);
-    cout << "Eseguiti " << numeroscambi << " confronti." << endl;
-    stampaVettore(vs, n);
 
+    
+    
+
+
+    int numb;
+    cout << "Select a sort:" << "\n" << "1) BubbleSort" << "\n" << "2) QuickSort" << "[1-2]" << endl;
+    cin >> numb;
+
+    if (numb == 1) {
+        bubbleSort(vs, n);
+        int x = bubbleSort(vs, n);
+        cout << "Eseguiti " << x << " confronti." << endl;
+    } else if (numb == 2) {
+        quickSort(vs, 0, n-1);
+        cout << "Eseguiti " << numeroscambi << " confronti." << endl;
+    }
+
+    
+    stampaVettore(vs, n);
     
 
     return 0;
 }
+
