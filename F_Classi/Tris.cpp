@@ -62,6 +62,69 @@ public:
         return true;
     }
 
+    int controlla_vittoria(){
+        int risultato;
+        for (int i = 0; i < 3; i++){
+            risultato = controlla_colonna(i);
+            if (risultato != 0){
+                return risultato;
+            }
+            risultato = controlla_riga(i);
+            if (risultato != 0){
+                return risultato;
+            }
+        }
+
+        
+    }
+
+private:
+    bool controlla_colonna(int col) {
+        int acc_uno = 0;
+        int acc_due = 0;
+        for (int i = 0; i < 3; i++){
+            int cella = griglia[i][col];
+            if (cella == 1){
+                acc_uno++;
+            } else if (cella == 2){
+                acc_due++;
+            } else {
+                return false;
+            }
+        }
+        if (acc_uno == 3){
+            return true;
+        }
+        if (acc_due == 3){
+            return true;
+        }
+        return false;
+    }
+    bool controlla_riga(int riga) {
+        int acc_uno = 0;
+        int acc_due = 0;
+        for (int i = 0; i < 3; i++){
+            int cella = griglia[riga][i];
+            if (cella == 1){
+                acc_uno++;
+            } else if (cella == 2){
+                acc_due++;
+            } else {
+                return false;
+            }
+        }
+        if (acc_uno == 3){
+            return true;
+        }
+        if (acc_due == 3){
+            return true;
+        }
+        return false;
+    }
+
+    bool controlla_diagonale() {
+    }
+
 };
 
 int main(int argc, char const* argv[]){
@@ -75,30 +138,54 @@ int main(int argc, char const* argv[]){
 
     int x, y;
     bool mossa_valida;
+    int vincitore;
+    int contatore_mosse = 0;
 
-    do {
-        cout << "Giocatore 1: Inserisci le coordinate della tua mossa" << endl;
-        cout << "Inserisci la coordinata x: ";
-        cin >> x;
-        cout << "Inserisci la coordinata y: ";
-        cin >> y;
-        mossa_valida = myTris.giocatore_uno(x, y);
-    } while (!mossa_valida);
+    while (contatore_mosse < 9){
+        do {
+            cout << "Giocatore 1: Inserisci le coordinate della tua mossa" << endl;
+            cout << "X: ";
+            cin >> x;
+            cout << "Y: ";
+            cin >> y;
+            mossa_valida = myTris.giocatore_uno(x, y);
+        } while (!mossa_valida);
 
-    cout << "Griglia dopo la mossa" << endl;
-    myTris.stampa_griglia();
+        cout << "Griglia dopo la mossa" << endl;
+        myTris.stampa_griglia();
 
-    do {
-        cout << "Giocatore 2: Inserisci le coordinate della tua mossa" << endl;
-        cout << "X: ";
-        cin >> x;
-        cout << "Y: ";
-        cin >> y;
-        mossa_valida = myTris.giocatore_due(x, y);
-    } while (!mossa_valida);
+        vincitore = myTris.controlla_vittoria();
+        if (vincitore != 0){
+            break;
+        }
 
-    cout << "Griglia dopo la mossa" << endl;
-    myTris.stampa_griglia();
+        do {
+            cout << "Giocatore 2: Inserisci le coordinate della tua mossa" << endl;
+            cout << "X: ";
+            cin >> x;
+            cout << "Y: ";
+            cin >> y;
+            mossa_valida = myTris.giocatore_due(x, y);
+        } while (!mossa_valida);
+
+        cout << "Griglia dopo la mossa" << endl;
+        myTris.stampa_griglia();
+
+        vincitore = myTris.controlla_vittoria();
+        if (vincitore != 0){
+            break;
+        }
+
+        contatore_mosse+=2;
+    }
+
+    if (vincitore == 1){
+        cout << "Ha vinto il giocatore 1" << endl;
+    } else if (vincitore == 2){
+        cout << "Ha vinto il giocatore 2" << endl;
+    } else {
+        cout << "Pareggio" << endl;
+    }
 
     return 0;
 }
