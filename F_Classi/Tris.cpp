@@ -46,5 +46,8 @@ int main(int argc, char const* argv[]){
 
     myTris.reset_tabella();
 
+    cout << "Griglia iniziale" << endl;
+    myTris.stampa_griglia();
+
     return 0;
 }
