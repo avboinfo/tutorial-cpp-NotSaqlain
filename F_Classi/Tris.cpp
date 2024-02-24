@@ -78,7 +78,7 @@ public:
                 return risultato;
             }
         }
-
+        return risultato;
     }
 
 private:
