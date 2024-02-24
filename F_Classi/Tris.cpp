@@ -65,20 +65,19 @@ public:
     bool controlla_vittoria(){
         int risultato;
         for (int i = 0; i < 3; i++){
-            risultato = controlla_colonna(i);
-            if (risultato != 0){
-                return risultato;
+
+            if (controlla_colonna(i) != 0){
+                return controlla_colonna(i);
             }
-            risultato = controlla_riga(i);
-            if (risultato != 0){
-                return risultato;
+            
+            if (controlla_riga(i) != 0){
+                return controlla_riga(i);
             }
-            risultato = controlla_diagonale();
-            if (risultato != 0){
-                return risultato;
+            if (controlla_diagonale() != 0){
+                return controlla_diagonale();
             }
         }
-        return risultato;
+        return false;
     }
 
 private:
