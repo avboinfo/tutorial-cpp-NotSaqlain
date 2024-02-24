@@ -63,21 +63,17 @@ public:
     }
 
     bool controlla_vittoria(){
-        int risultato;
         for (int i = 0; i < 3; i++){
-
             if (controlla_colonna(i) != 0){
                 return controlla_colonna(i);
             }
-            
+
             if (controlla_riga(i) != 0){
                 return controlla_riga(i);
             }
-            if (controlla_diagonale() != 0){
-                return controlla_diagonale();
-            }
         }
-        return false;
+
+        return controlla_diagonale();
     }
 
 private:
