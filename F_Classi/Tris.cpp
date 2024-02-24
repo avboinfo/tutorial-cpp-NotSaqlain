@@ -62,7 +62,7 @@ public:
         return true;
     }
 
-    bool controlla_vittoria(){
+    int controlla_vittoria(){
         for (int i = 0; i < 3; i++){
             if (controlla_colonna(i) != 0){
                 return controlla_colonna(i);
@@ -77,7 +77,7 @@ public:
     }
 
 private:
-    bool controlla_colonna(int col) {
+    int controlla_colonna(int col) {
         int acc_uno = 0;
         int acc_due = 0;
         for (int i = 0; i < 3; i++){
@@ -91,14 +91,14 @@ private:
             }
         }
         if (acc_uno == 3){
-            return true;
+            return 1;
         }
         if (acc_due == 3){
-            return true;
+            return 2;
         }
         return false;
     }
-    bool controlla_riga(int riga) {
+    int controlla_riga(int riga) {
         int acc_uno = 0;
         int acc_due = 0;
         for (int i = 0; i < 3; i++){
@@ -112,15 +112,15 @@ private:
             }
         }
         if (acc_uno == 3){
-            return true;
+            return 1;
         }
         if (acc_due == 3){
-            return true;
+            return 2;
         }
         return false;
     }
 
-    bool controlla_diagonale() {
+    int controlla_diagonale() {
         int acc_uno = 0;
         int acc_due = 0;
         for (int i = 0; i < 3; i++){
@@ -134,10 +134,10 @@ private:
             }
         }
         if (acc_uno == 3){
-            return true;
+            return 1;
         }
         if (acc_due == 3){
-            return true;
+            return 2;
         }
         return false;
     }
