@@ -171,6 +171,8 @@ int main(int argc, char const* argv[]){
         cout << "Griglia dopo la mossa" << endl;
         myTris.stampa_griglia();
 
+        if (contatore_mosse >=9) break;
+
         vincitore = myTris.controlla_vittoria();
         if (vincitore != 0){
             break;
