@@ -123,6 +123,25 @@ private:
     }
 
     bool controlla_diagonale() {
+        int acc_uno = 0;
+        int acc_due = 0;
+        for (int i = 0; i < 3; i++){
+            int cella = griglia[i][i];
+            if (cella == 1){
+                acc_uno++;
+            } else if (cella == 2){
+                acc_due++;
+            } else {
+                return false;
+            }
+        }
+        if (acc_uno == 3){
+            return true;
+        }
+        if (acc_due == 3){
+            return true;
+        }
+        return false;
     }
 
 };
@@ -159,7 +178,7 @@ int main(int argc, char const* argv[]){
             break;
         }
 
-        do {
+        do {     
             cout << "Giocatore 2: Inserisci le coordinate della tua mossa" << endl;
             cout << "X: ";
             cin >> x;
