@@ -62,7 +62,7 @@ public:
         return true;
     }
 
-    int controlla_vittoria(){
+    bool controlla_vittoria(){
         int risultato;
         for (int i = 0; i < 3; i++){
             risultato = controlla_colonna(i);
@@ -73,9 +73,12 @@ public:
             if (risultato != 0){
                 return risultato;
             }
+            risultato = controlla_diagonale();
+            if (risultato != 0){
+                return risultato;
+            }
         }
 
-        
     }
 
 private:
