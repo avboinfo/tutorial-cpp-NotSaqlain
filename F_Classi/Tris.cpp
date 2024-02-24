@@ -11,24 +11,24 @@ se in griglia c'e' DUE stiamo parlando di un CERCHIO (giocatore 2)
 
 class Tris{
 public:
-    int griglia[3][3];
+    char griglia[3][3];
 
     void reset_tabella(){
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < 3; j++){
-                griglia[i][j]=0;
+                griglia[i][j]=' ';
             }
         }
     }
 
     void stampa_griglia(){
-        cout << "-------------\n"; 
+        cout << "⚝──⭒──⭑──⭒──⚝\n"; 
         for (int i = 0; i < 3; i++) { 
-            cout << "| "; 
+            cout << "┋ "; 
             for (int j = 0; j < 3; j++) { 
-                cout << griglia[i][j] << " | "; 
+                cout << griglia[i][j] << " ┋ "; 
             } 
-            cout << "\n-------------\n"; 
+            cout << "\n⚝──⭒──⭑──⭒──⚝\n"; 
         } 
 
     }
@@ -45,7 +45,7 @@ public:
         if (griglia[x][y] == 1 || griglia[x][y] == 2){
             return false;
         }
-        griglia[x][y] = 1;
+        griglia[x][y] = 'X';
         return true;
     }
 
@@ -61,7 +61,7 @@ public:
         if (griglia[x][y] == 1 || griglia[x][y] == 2){
             return false;
         }
-        griglia[x][y] = 2;
+        griglia[x][y] = 'O';
         return true;
     }
 
