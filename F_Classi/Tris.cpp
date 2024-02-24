@@ -22,12 +22,15 @@ public:
     }
 
     void stampa_griglia(){
-        for(int i = 0; i < 3; i++){
-            for(int j = 0; j < 3; j++){
-                cout << griglia[i][j] << "\t";
-            }
-            cout << endl;
-        }
+        cout << "-------------\n"; 
+        for (int i = 0; i < 3; i++) { 
+            cout << "| "; 
+            for (int j = 0; j < 3; j++) { 
+                cout << griglia[i][j] << " | "; 
+            } 
+            cout << "\n-------------\n"; 
+        } 
+
     }
 
     bool giocatore_uno(int x, int y){
