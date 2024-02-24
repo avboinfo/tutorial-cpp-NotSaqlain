@@ -3,12 +3,6 @@
 
 using namespace std;
 
-/* 
-se in griglia c'e' ZERO cella vuota
-se in griglia c'e' UNO stiamo parlando di una X o (giocatore 1)
-se in griglia c'e' DUE stiamo parlando di un CERCHIO (giocatore 2)
-*/
-
 class Tris{
 public:
     char griglia[3][3];
@@ -16,7 +10,7 @@ public:
     void reset_tabella(){
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < 3; j++){
-                griglia[i][j] = '-';
+                griglia[i][j] = ' ';
             }
         }
     }
@@ -37,7 +31,7 @@ public:
         if (x > 2 || x < 0 || y > 2 || y < 0)
             return false;
 
-        if (griglia[x][y] != '-')
+        if (griglia[x][y] != ' ')
             return false;
 
         griglia[x][y] = 'X';
@@ -48,7 +42,7 @@ public:
         if (x > 2 || x < 0 || y > 2 || y < 0)
             return false;
 
-        if (griglia[x][y] != '-')
+        if (griglia[x][y] != ' ')
             return false;
 
         griglia[x][y] = 'O';
@@ -56,57 +50,44 @@ public:
     }
 
     char controlla_vincitore() {
-        char risultato;
         for (int i = 0; i < 3; i++) {
-            risultato = controlla_collonna(i);
-            if (risultato != '-')
-                return risultato;
+            if (controlla_collonna(i) != ' ') return controlla_collonna(i);
+            if (controlla_riga(i) != ' ') return controlla_riga(i);
+            if (controlla_diagonali() != ' ') return controlla_diagonali();
+        }   
 
-            risultato = controlla_riga(i);
-            if (risultato != '-')
-                return risultato;
-        }
-
-        risultato = controlla_diagonali();
-        if (risultato != '-')
-            return risultato;
-
-        return '-';
+        return ' ';
     }
 
 private:
     char controlla_collonna(int col) {
         char cella = griglia[0][col];
-        if (cella != '-') {
-            if (griglia[1][col] == cella && griglia[2][col] == cella)
-                return cella;
+        if (cella != ' ') {
+            if (griglia[1][col] == cella && griglia[2][col] == cella) return cella;
         }
-        return '-';
+        return ' ';
     }
 
     char controlla_riga(int riga) {
         char cella = griglia[riga][0];
-        if (cella != '-') {
-            if (griglia[riga][1] == cella && griglia[riga][2] == cella)
-                return cella;
+        if (cella != ' ') {
+            if (griglia[riga][1] == cella && griglia[riga][2] == cella) return cella;
         }
-        return '-';
+        return ' ';
     }
 
     char controlla_diagonali() {
         char cella = griglia[0][0];
-        if (cella != '-') {
-            if (griglia[1][1] == cella && griglia[2][2] == cella)
-                return cella;
+        if (cella != ' ') {
+            if (griglia[1][1] == cella && griglia[2][2] == cella) return cella;
         }
 
         cella = griglia[0][2];
-        if (cella != '-') {
-            if (griglia[1][1] == cella && griglia[2][0] == cella)
-                return cella;
+        if (cella != ' ') {
+            if (griglia[1][1] == cella && griglia[2][0] == cella) return cella;
         }
 
-        return '-';
+        return ' ';
     }
 };
 
@@ -119,52 +100,38 @@ int main(int argc, char const *argv[]) {
 
     int x, y;
     bool mossa_valida;
-    char vincitore = '-';
     int mosse_totali = 0;
 
     while (mosse_totali < 9) {
         do {
-            cout << "Mossa del giocatore 1 (X)." << endl;
-            cout << "x: ";
-            cin >> x;
-            cout << "y: ";
-            cin >> y;
-            mossa_valida = myTris.giocatore_uno(y, x);
-        } while (!mossa_valida);
-
-        myTris.stampa_griglia();
-        vincitore = myTris.controlla_vincitore();
-        if (vincitore != '-')
-            break;
-
+            cout << "Giocatore 1:" << endl;
+            cout << "X e Y: ";
+            cin >> x >> y;
+        } while (!myTris.giocatore_uno(y, x));
         mosse_totali++;
 
-        if (mosse_totali == 9)
-            break; // Controllo per parità
+        myTris.stampa_griglia();
+
+        if (myTris.controlla_vincitore()!= ' ')
+            break;
+
+        if (mosse_totali == 9) break;
 
         do {
-            cout << "Mossa del giocatore 2 (O)." << endl;
-            cout << "x: ";
-            cin >> x;
-            cout << "y: ";
-            cin >> y;
-            mossa_valida = myTris.giocatore_due(y, x);
-        } while (!mossa_valida);
+            cout << "Giocatore 2:" << endl;
+            cout << "X e Y: ";
+            cin >> x >> y;
+        } while (!myTris.giocatore_due(y, x));
+        mosse_totali++;
 
         myTris.stampa_griglia();
-        vincitore = myTris.controlla_vincitore();
-        if (vincitore != '-')
-            break;
 
-        mosse_totali++;
+        if (myTris.controlla_vincitore() != ' ') break;
     }
 
-    if (vincitore == 'X')
-        cout << "Vince giocatore 1 (X)!" << endl;
-    else if (vincitore == 'O')
-        cout << "Vince giocatore 2 (O)!" << endl;
-    else
-        cout << "Pareggio!" << endl;
+    if (myTris.controlla_vincitore() == 'X') cout << "Il giocatore 1 ha vinto!" << endl;
+    else if (myTris.controlla_vincitore() == 'O') cout << "Il giocatore 2 ha vinto!" << endl;
+    else cout << "Pareggio!" << endl;
 
     return 0;
 }
