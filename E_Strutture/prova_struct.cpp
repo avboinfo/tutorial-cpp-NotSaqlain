@@ -2,9 +2,11 @@
 ** prova_struct.cpp
 ** Author: IAV 3CIN
 ** 28/02/2021
+** ~ 26/02/2024
 */
 
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -19,13 +21,19 @@ struct numeri
     float val_due;
 };
 
+struct persona
+{
+    string nome;
+    int eta;
+};
 
 int main()
 {
-  struct numeri n;
-  n.val_uno = 100;
-  cout <<  "1) n.val_uno = " << n.val_uno << " - " << "n.val_due = " << n.val_due << endl;
-  n.val_due = 33.33;
-  cout <<  "2) n.val_uno = " << n.val_uno << " - " << "n.val_due = " << n.val_due << endl;
+  struct persona gigi, gigietto;
+  gigi.nome = "Saqlain";
+  gigi.eta = 18;
+  gigietto.nome = "TopG";
+  gigietto.eta = 6;
+  cout << "Gigi si chiama: " << gigi.nome << " e ha " << gigi.eta << " anni." << endl;
   return 0;
 }
