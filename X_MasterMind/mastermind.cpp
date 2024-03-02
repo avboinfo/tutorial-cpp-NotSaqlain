@@ -50,7 +50,7 @@ public:
         std::cout << numero_mosse + 1 << "° Giocata" << std::endl;
         
         do {
-            std::cout << "Inserisci la tua mossa: ";
+            std::cout << numero_mosse + 1 << ": ";
             std::getline(std::cin, ultima_mossa); // std::cin >> ultima_mossa; non funziona con gli spazi
         } while (!sanifica_input());
 
