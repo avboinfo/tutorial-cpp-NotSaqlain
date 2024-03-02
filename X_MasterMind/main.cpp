@@ -6,7 +6,8 @@ using namespace std;
 
 int main(){
 
-    mastermind prova = mastermind();
+    mastermind prova;
+    prova.nuova_giocata();
 
     return 0;
 }
