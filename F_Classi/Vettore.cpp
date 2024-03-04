@@ -35,10 +35,10 @@ public:
 
 int main() {
     Vettore v(10);
-    v.add(5);
-    v.add(3);
-    v.add(7);
-    v.print();
+    
+    for (int i = 0; i < 20; i++) {
+        v.add(33*i);
+    }
 
     return 0;
 }
