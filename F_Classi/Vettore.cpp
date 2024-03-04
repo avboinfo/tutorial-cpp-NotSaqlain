@@ -39,6 +39,7 @@ int main() {
     for (int i = 0; i < 20; i++) {
         v.add(33*i);
     }
+    v.print();
 
     return 0;
 }
