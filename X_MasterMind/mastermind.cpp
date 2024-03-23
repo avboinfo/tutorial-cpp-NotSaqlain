@@ -74,7 +74,6 @@ public:
         }
         
         std::cout << "Strike: " << strike << " Ball: " << ball << std::endl;
-
         if (strike == DIM_MOSSA_VALIDA) {
             std::cout << "Hai vinto!" << std::endl;
         }
