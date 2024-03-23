@@ -11,23 +11,22 @@ private:
     int codice_segreto[DIM_MOSSA_VALIDA];
 
     bool sanifica_input() {
-
-    if (ultima_mossa.size() != DIM_MOSSA_VALIDA) {
-        return false;
-    }
-
-    for (int i = 0; i < ultima_mossa.size(); i++) {
-        char c = ultima_mossa[i];
-
-        if (c >= '0' && c <= '9') {
-            mossa_valida[i] = c - '0';
-        } else if (c == '-') {
-            mossa_valida[i] = -1;
-        } else {
+        if (ultima_mossa.size() != DIM_MOSSA_VALIDA) {
             return false;
         }
-    }
-    return true;
+
+        for (int i = 0; i < ultima_mossa.size(); i++) {
+            char c = ultima_mossa[i];
+
+            if (c >= '0' && c <= '9') {
+                mossa_valida[i] = c - '0';
+            } else if (c == '-') {
+                mossa_valida[i] = -1;
+            } else {
+                return false;
+            }
+        }
+        return true;
     }
 
     void genera_codice() {
