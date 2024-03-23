@@ -4,8 +4,10 @@
 
 class mastermind {
 private:
-    int numero_mosse;
     std::string ultima_mossa;
+    int numero_mosse;
+    bool hai_vinto;
+    static const int NUMERO_MASSIMO_MOSSE = 9;
     static const int DIM_MOSSA_VALIDA = 4;
     int mossa_valida[DIM_MOSSA_VALIDA];
     int codice_segreto[DIM_MOSSA_VALIDA];
@@ -33,10 +35,24 @@ private:
         }
     }
 
+    int* copia_vettore(int vettore_oroginale[]) {
+        static int vettore_copia[DIM_MOSSA_VALIDA];
+        for (int i = 0; i < DIM_MOSSA_VALIDA; i++) {
+            vettore_copia[i] = vettore_oroginale[i];
+        }
+        return vettore_copia;
+    }
+    int copia_vettore(int vettore_oroginale[], int vetore_copia[], int dim_vet) {
+        for (int i = 0; i < DIM_MOSSA_VALIDA; i++) {
+            vetore_copia[i] = vettore_oroginale[i];
+        }
+    }
+
 public:
     mastermind() {
         numero_mosse = 0;
         ultima_mossa = "";
+        hai_vinto = false;
         genera_codice();
     }
 
@@ -55,6 +71,9 @@ public:
         int ball = 0;   // Posizione sbagliata;
         int strike = 0; // Posizione giusta
 
+        int codice_segreto_copia[DIM_MOSSA_VALIDA];
+        copia_vettore(codice_segreto);
+        
         for (int i = 0; i < DIM_MOSSA_VALIDA; i++) {
             if (mossa_valida[i] == codice_segreto[i]) {
                 strike++;
