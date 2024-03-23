@@ -10,21 +10,18 @@ private:
     int mossa_valida[DIM_MOSSA_VALIDA];
     int codice_segreto[DIM_MOSSA_VALIDA];
 
-    bool sanifica_input() {
-        if (ultima_mossa.size() != DIM_MOSSA_VALIDA) {
+     bool sanifica_input() {
+        if (DIM_MOSSA_VALIDA != ultima_mossa.size())
             return false;
-        }
-
-        for (int i = 0; i < ultima_mossa.size(); i++) {
+        for(int i = 0; i < ultima_mossa.size(); i++) {
             char c = ultima_mossa[i];
 
-            if (c >= '0' && c <= '9') {
+            if(c >='0' && c <= '9')
                 mossa_valida[i] = c - '0';
-            } else if (c == '-') {
-                mossa_valida[i] = -1;
-            } else {
+            else if(c == '-')  // il trattino verra convertito in -1  
+                mossa_valida[i]= -1;
+            else
                 return false;
-            }
         }
         return true;
     }
