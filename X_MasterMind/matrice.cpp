@@ -14,24 +14,25 @@ private:
     int m[10][10];
 
 public:
-    matrice() {
-        for (int i = 0; i < 10; i++)
-            for (int j = 0; j < 10; j++)
+    matrice(int n) {
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < n; j++)
                 m[i][j] = 0;
     }
 
-    void stampa() {
+    void stampa(int n) {
         cout << "----- Matrice -----\n";
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++)
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++)
                 cout << m[i][j] << " ";
             cout << endl;
         }
+        cout << "-------------------\n";
     }
 };
 
 int main() {
-    matrice m;
-    m.stampa();
+    matrice m(10);
+    m.stampa(10);
     return 0;
 }
