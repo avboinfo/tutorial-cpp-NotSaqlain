@@ -19,7 +19,7 @@ public:
     matrice() {
         for (int i = 0; i < N; i++)
             for (int j = 0; j < N; j++)
-                m[i][j] = rand() % 10;
+                m[i][j] = 97 + rand() % 26;
     }
     matrice(int n) {
         for (int i = 0; i < n; i++)
@@ -31,20 +31,33 @@ public:
         cout << "----- Matrice -----\n";
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-                printf("%2d ", m[i][j]);
+                printf("%2c ", m[i][j]);
                 //cout << m[i][j] << " ";
             }
             cout << endl;
         }
         cout << "-------------------\n";
     }
+
+    void bomb(){
+        int x = rand() % N;
+        int y = rand() % N;
+        m[x][y] = '*';
+    }
+
+    void placeShip(int x, int y){
+        m[x][y] = 'S';
+    }
 };
 
 int main() {
     srand(time(NULL));
-    matrice m(9);
+    matrice m('-');
     matrice n;
-    n.stampa();
     m.stampa();
+    for (int i = 0; i < 10; i++){
+        n.bomb();
+    }
+    n.stampa();
     return 0;
 }
