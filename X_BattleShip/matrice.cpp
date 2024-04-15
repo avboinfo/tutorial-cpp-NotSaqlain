@@ -9,14 +9,16 @@
 
 using namespace std;
 
+const int N = 10;
+
 class matrice {
 private:    
-    int m[10][10];
+    int m[N][N];
 
 public:
     matrice() {
-        for (int i = 0; i < 10; i++)
-            for (int j = 0; j < 10; j++)
+        for (int i = 0; i < N; i++)
+            for (int j = 0; j < N; j++)
                 m[i][j] = rand() % 10;
     }
     matrice(int n) {
@@ -27,9 +29,11 @@ public:
 
     void stampa() {
         cout << "----- Matrice -----\n";
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++)
-                cout << m[i][j] << " ";
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                printf("%2d ", m[i][j]);
+                //cout << m[i][j] << " ";
+            }
             cout << endl;
         }
         cout << "-------------------\n";
@@ -38,7 +42,7 @@ public:
 
 int main() {
     srand(time(NULL));
-    matrice m(10);
+    matrice m(9);
     matrice n;
     n.stampa();
     m.stampa();
