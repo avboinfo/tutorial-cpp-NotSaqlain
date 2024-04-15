@@ -25,6 +25,7 @@ public:
             dim += delta;
             v = nuovo;
         }
+        
         v[len] = x;
         len++;
     }
