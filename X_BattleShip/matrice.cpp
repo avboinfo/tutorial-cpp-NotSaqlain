@@ -45,19 +45,32 @@ public:
         m[x][y] = '*';
     }
 
-    void placeShip(int x, int y){
-        m[x][y] = 'S';
+    void placeHorizontalShip(int len){
+        if (len > N) return;
+        int x = rand() % N;
+        int y = rand() % N-len;
+        for (int i = 0; i < len; i++){
+            m[x+i][y] = 'S';
+        }
+    }
+
+    void placeVerticalShip(int len){
+        if (len > N) return;
+        int x = rand() % N;
+        int y = rand() % N-len;
+        for (int i = 0; i < len; i++){
+            m[x][y+i] = 'S';
+        }
     }
 };
 
 int main() {
     srand(time(NULL));
-    matrice m('-');
-    matrice n;
-    m.stampa();
-    for (int i = 0; i < 10; i++){
-        n.bomb();
-    }
-    n.stampa();
+    matrice mappa('-');
+    mappa.stampa();
+
+    matrice campo = matrice(' ');
+    campo.placeHorizontalShip(4);
+    campo.stampa();
     return 0;
 }
