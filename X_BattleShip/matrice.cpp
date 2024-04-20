@@ -10,6 +10,11 @@
 using namespace std;
 
 const int N = 10;
+const char MISS = 'O';
+const char HIT = '*';
+const char VOID = '-';
+const char SHIP = 'x';
+
 
 class Matrice {
 private:    
@@ -48,28 +53,24 @@ public:
         cout << "-------------------\n";
     }
 
-    void bomb(){
+    void bomb() {
         int x = rand() % N;
         int y = rand() % N;
         m[x][y] = '*';
     }
 
-    void placeHorizontalShip(int len){
-        if (len > N) return;
-        int x = rand() % N;
-        int y = rand() % N-len;
-        for (int i = 0; i < len; i++){
-            m[x+i][y] = 'S';
-        }
+    void placeHorizontalShip(int len) {
+        if (len<=0 || len>=N) return;
+        int x = rand() % (N);
+        int y = rand() % (N-len);
+        for (int i=0; i<len; i++) m[x][y+i] = 'O';
     }
 
-    void placeVerticalShip(int len){
-        if (len > N) return;
-        int x = rand() % N;
-        int y = rand() % N-len;
-        for (int i = 0; i < len; i++){
-            m[x][y+i] = 'S';
-        }
+    void placeVerticalShip(int len) {
+        if (len<=0 || len>=N) return;
+        int x = rand() % (N-len);
+        int y = rand() % (N);
+        for (int i=0; i<len; i++) m[x+i][y] = 'O';
     }
 };
 
@@ -86,7 +87,7 @@ int main() {
     for (int i=0; i<20; i++) {
         int x = rand() % N;
         int y = rand() % N;
-        if (campo.get(x,y)=='O') mappa.put(x,y,'*');
+        if (campo.get(x,y)=='O') mappa.put(x,y,'*'); else mappa.put(x,y,'X');
     }
 
     mappa.stampa();
