@@ -11,20 +11,29 @@ using namespace std;
 
 const int N = 10;
 
-class matrice {
+class Matrice {
 private:    
     int m[N][N];
 
 public:
-    matrice() {
+    Matrice() {
         for (int i = 0; i < N; i++)
             for (int j = 0; j < N; j++)
                 m[i][j] = 97 + rand() % 26;
     }
-    matrice(int n) {
+
+    Matrice(int n) {
         for (int i = 0; i < n; i++)
             for (int j = 0; j < n; j++)
                 m[i][j] = n;
+    }
+
+    char get( int x, int y ) {
+        return m[x][y];
+    }
+
+    void put( int x, int y, char c ) {
+        m[x][y] = c;
     }
 
     void stampa() {
@@ -66,11 +75,20 @@ public:
 
 int main() {
     srand(time(NULL));
-    matrice mappa('-');
+    Matrice mappa = Matrice( '-' );
+    Matrice campo = Matrice( '.' );
+    campo.placeHorizontalShip(3);
+    campo.placeVerticalShip(4);
+    campo.placeVerticalShip(2);
+    campo.placeHorizontalShip(5);
+
+    // lancia 20 bombe a caso
+    for (int i=0; i<20; i++) {
+        int x = rand() % N;
+        int y = rand() % N;
+        if (campo.get(x,y)=='O') mappa.put(x,y,'*');
+    }
+
     mappa.stampa();
 
-    matrice campo = matrice(' ');
-    campo.placeHorizontalShip(4);
-    campo.stampa();
-    return 0;
 }
