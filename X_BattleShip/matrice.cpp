@@ -1,8 +1,8 @@
 /*
     Saqlain Khalid
-    matrice.cpp
-    13/04/2024
-    questo file contiene la definizione delle funzioni della classe matrice
+    BattleField.cpp
+    19/04/2024
+    questo file contiene la definizione delle funzioni della classe BattleField
 */
 
 #include <iostream>
@@ -16,18 +16,18 @@ const char VOID = '-';
 const char SHIP = 'x';
 
 
-class Matrice {
+class BattleField {
 private:    
-    int m[N][N];
+    char m[N][N];
 
 public:
-    Matrice() {
+    BattleField() {
         for (int i = 0; i < N; i++)
             for (int j = 0; j < N; j++)
                 m[i][j] = 97 + rand() % 26;
     }
 
-    Matrice(int n) {
+    BattleField(char n) {
         for (int i = 0; i < n; i++)
             for (int j = 0; j < n; j++)
                 m[i][j] = n;
@@ -42,7 +42,7 @@ public:
     }
 
     void stampa() {
-        cout << "----- Matrice -----\n";
+        cout << "---------- BattleField ----------\n";
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
                 printf("%2c ", m[i][j]);
@@ -50,7 +50,7 @@ public:
             }
             cout << endl;
         }
-        cout << "-------------------\n";
+        cout << "-----------------------------\n";
     }
 
     void bomb() {
@@ -76,20 +76,34 @@ public:
 
 int main() {
     srand(time(NULL));
-    Matrice mappa = Matrice( '-' );
-    Matrice campo = Matrice( '.' );
-    campo.placeHorizontalShip(3);
-    campo.placeVerticalShip(4);
-    campo.placeVerticalShip(2);
-    campo.placeHorizontalShip(5);
+    BattleField mappa = BattleField('-');
+    BattleField campo = BattleField(' ');
 
-    // lancia 20 bombe a caso
-    for (int i=0; i<20; i++) {
-        int x = rand() % N;
-        int y = rand() % N;
-        if (campo.get(x,y)=='O') mappa.put(x,y,'*'); else mappa.put(x,y,'X');
-    }
-
+    cout << "- initial map -" << endl;
     mappa.stampa();
 
+    // posizionamento navi sul campo di gioco e aggiornamento della mappa nascosta
+    campo.placeHorizontalShip(3);
+    campo.placeHorizontalShip(4);
+    campo.placeVerticalShip(2);
+    campo.placeVerticalShip(4);
+
+    //cout << endl << "- updated map - ships placed" << endl;
+    //campo.stampa(); // mappa aggiornata
+    
+    // lancia 20 bombe a caso
+    for (int i=0; i<=20; i++) {
+        int x = rand() % N;
+        int y = rand() % N;
+        if (mappa.get(x, y) == HIT || mappa.get(x, y) == MISS) continue;
+        if (campo.get(x, y) == '-' || campo.get(x, y) == '|') {
+            mappa.put(x, y, HIT);
+            campo.put(x, y, HIT);
+        } else mappa.put(x, y, MISS);
+    }
+
+    cout << endl << "- updated map - bombs dropped" << endl;
+    mappa.stampa(); // mappa aggiornata
+
+    return 0;
 }
