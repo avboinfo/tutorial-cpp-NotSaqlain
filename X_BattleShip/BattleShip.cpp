@@ -1,76 +1,63 @@
 /*
- * BattleShipOne - Una battaglia navale contro il computer sulla costa
- * Author: Sandro Gallo
- * Date: 4 december 2020
- * Help sui codici nella mappa: 0-empty, 1-ship, 2-bomb, 3-strike
- */
+** BattleShip.cpp una classe per giocare alla Battaglia Navale
+** Saqlain Khalid - 20/04/2024
+*/
 
 #include <iostream>
-#include <cstdlib>
-#include <ctime>
+#include "BattleField.cpp"
 
 using namespace std;
 
-void initialize(int v[], int l) {
-    for (int i = 0; i < l; i++) v[i] = 0;
-}
+// DIM, SHIP, MISS, HIT, VOID
 
-void show(int v[], int l) {
-    for (int i = 0; i < l; i++) {
-        switch (v[i]) {
-        case 0: cout << "O "; break;
-        case 1: cout << "O "; break;
-        case 2: cout << "- "; break;
-        case 3: cout << "* ";
+class BattleShip {
+
+    private:
+
+    BattleField mappa;
+    BattleField campo;
+
+    public:
+    BattleShip() {
+        mappa = BattleField(VOID);
+        campo = BattleField(VOID);
+        campo.placeHorizontalShip(3);
+        campo.placeVerticalShip(4);
+        campo.placeVerticalShip(2);
+        campo.placeHorizontalShip(5);
+    }
+
+    void play() {
+
+        // lancia 20 bombe a caso
+        for (int i=0; i<20; i++) {
+            int x = rand() % DIM;
+            int y = rand() % DIM;
+            if (campo.get(x,y)==HIT) continue;
+            if (campo.get(x,y)==SHIP) {
+                mappa.put(x,y,HIT);
+                campo.put(x,y,HIT);
+            } else mappa.put(x,y,MISS);
         }
+
+        mappa.stampa();
+
+        ask();
+
+        mappa.stampa();
+        campo.stampa();
+
     }
-    cout << endl;
-}
 
-void arrange(int v[], int l) {
-    srand((unsigned int)time(NULL));
-    int n = rand() % (l - 1); // elle meno uno !!!!!!
-    v[n] = 1;
-    v[n + 1] = 1;
-}
-
-void launch(int v[], int l) {
-    int p = 0;
-    while (p<1 || p>l) {
-        cout << "Inserire le coordinate in cui sgangiare la bomba (1.." << l << "): ";
-        cin >> p;
+    void ask() {
+        cout << "Inserisci le coordinate di riga e colonna in cui sganciare la bomba: ";
+        int x, y;
+        cin >> x;
+        cin >> y;
+        if (campo.get(x,y)==SHIP) {
+            mappa.put(x,y,HIT);
+            campo.put(x,y,HIT);
+        } else mappa.put(x,y,MISS);
     }
-    p--;
-    if (v[p] == 0) v[p] = 2;
-    if (v[p] == 1) v[p] = 3;
-}
 
-bool weWon(int v[], int l) {
-    for (int i = 0; i < l; i++) {
-        if (v[i] == 1) return false;
-    }
-    return true;
-}
-
-int main()
-{
-    cout << "Programma BattleShipOne in esecuzione" << endl;
-    int num_bomb = 0;
-    const int MAPLENGTH = 10;
-    int map[MAPLENGTH];
-    initialize(map, MAPLENGTH);
-    arrange(map, MAPLENGTH);
-    show(map, MAPLENGTH);
-    while (true) {
-        num_bomb++;
-        launch(map, MAPLENGTH);
-        show(map, MAPLENGTH);
-        if (weWon(map, MAPLENGTH)) break;
-    }
-    if (num_bomb <= 3) cout << "Complimenti";
-    else if (num_bomb <= 5) cout << "Bravino";
-    else if (num_bomb <= 7) cout << "Accidenti";
-    cout << " hai distrutto la flotta nemica utilizzando " << num_bomb << " bombe." << endl;
-    return 0;
-}
-
+};
