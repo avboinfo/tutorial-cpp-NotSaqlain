@@ -8,7 +8,6 @@
 #include <iostream>
 using namespace std;
 
-// N, SHIP, MISS, HIT, VOID
 const int N = 10;
 const char SHIP = 'X';
 const char MISS = '.';

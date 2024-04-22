@@ -8,8 +8,6 @@
 
 using namespace std;
 
-// DIM, SHIP, MISS, HIT, VOID
-
 class BattleShip {
 
     private:
@@ -31,8 +29,8 @@ class BattleShip {
 
         // lancia 20 bombe a caso
         for (int i=0; i<20; i++) {
-            int x = rand() % DIM;
-            int y = rand() % DIM;
+            int x = rand() % N;
+            int y = rand() % N;
             if (campo.get(x,y)==HIT) continue;
             if (campo.get(x,y)==SHIP) {
                 mappa.put(x,y,HIT);
@@ -50,7 +48,7 @@ class BattleShip {
     }
 
     void ask() {
-        cout << "Inserisci le coordinate di riga e colonna in cui sganciare la bomba: ";
+        cout << "Dove vuoi lanciare la bomba? ";
         int x, y;
         cin >> x;
         cin >> y;
