@@ -8,12 +8,11 @@
 
 class BattleShip {
 
-    private:
-
+private:
     BattleField mappa;
     BattleField campo;
 
-    public:
+public:
     BattleShip() {
         mappa = BattleField(VOID);
         campo = BattleField(VOID);
@@ -25,6 +24,7 @@ class BattleShip {
 
     void play() {
 
+        /*
         // lancia 20 bombe a caso
         for (int i=0; i<20; i++) {
             int x = rand() % N;
@@ -35,25 +35,51 @@ class BattleShip {
                 campo.put(x,y,HIT);
             } else mappa.put(x,y,MISS);
         }
+        */
 
-        mappa.stampa();
+       while(!isGameOver()) {
+            mappa.stampa();
 
-        ask();
+            if (!ask()) {
+                break;
+            } 
 
-        mappa.stampa();
-        campo.stampa();
+            campo.stampa();
+            
+        }
 
     }
 
-    void ask() {
+    bool ask() {
         std::cout << "Dove vuoi lanciare la bomba? (x y)";
         int x, y;
         std::cin >> x;
         std::cin >> y;
+
+        if (x <= 0 || x >= N || y <= 0 || y >= N) {
+            std::cout << "Coordinate non valide" << std::endl;
+            return false;
+        } else {
+            x--;
+            y--;
+        }
+
         if (campo.get(x,y)==SHIP) {
             mappa.put(x,y,HIT);
             campo.put(x,y,HIT);
-        } else mappa.put(x,y,MISS);
+        } else
+            mappa.put(x,y,MISS);
+        
+        return true;
     }
 
+    bool isGameOver() {
+        for (int i=0; i<N; i++) {
+            for (int j=0; j<N; j++) {
+                if (campo.get(i,j)==SHIP)
+                    return false;
+            }
+        }
+        return true;
+    }
 };
