@@ -6,7 +6,6 @@
 */
 
 #include <iostream>
-using namespace std;
 
 const int N = 10;
 const char SHIP = 'X';
@@ -41,15 +40,15 @@ public:
     }
 
     void stampa() {
-        cout << "---------- BattleField ----------\n";
+        std::cout << "---------- BattleField ----------\n";
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
                 printf("%2c ", m[i][j]);
                 //cout << m[i][j] << " ";
             }
-            cout << endl;
+            std::cout << std::endl;
         }
-        cout << "-----------------------------\n";
+        std::cout << "-----------------------------\n";
     }
 
     void bomb() {

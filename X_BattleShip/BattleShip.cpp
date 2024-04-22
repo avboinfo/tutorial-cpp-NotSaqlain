@@ -6,8 +6,6 @@
 #include <iostream>
 #include "BattleField.cpp"
 
-using namespace std;
-
 class BattleShip {
 
     private:
@@ -48,10 +46,10 @@ class BattleShip {
     }
 
     void ask() {
-        cout << "Dove vuoi lanciare la bomba? ";
+        std::cout << "Dove vuoi lanciare la bomba? (x y)";
         int x, y;
-        cin >> x;
-        cin >> y;
+        std::cin >> x;
+        std::cin >> y;
         if (campo.get(x,y)==SHIP) {
             mappa.put(x,y,HIT);
             campo.put(x,y,HIT);
