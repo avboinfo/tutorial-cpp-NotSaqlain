@@ -16,10 +16,10 @@ const char VOID = '-';
 
 class BattleField {
 
-  private:
+private:
     char m[N][N];
 
-  public:
+public:
     BattleField() {
         for (int i=0; i<N; i++)
             for (int j=0; j<N; j++)
