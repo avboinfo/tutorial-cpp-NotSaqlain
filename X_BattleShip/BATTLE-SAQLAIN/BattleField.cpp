@@ -22,7 +22,7 @@ public:
     BattleField() {
         for (int i=0; i<N; i++)
             for (int j=0; j<N; j++)
-                m[i][j] = 97 + rand()%26;        
+                m[i][j] = VOID;
     }
 
     BattleField(char c) {
@@ -38,7 +38,7 @@ public:
     void put(int x, int y, char c) {
         m[x][y] = c;
     }
-    
+
     void placeShips(int len) {
         int x, y;
         while (len > 0) {
