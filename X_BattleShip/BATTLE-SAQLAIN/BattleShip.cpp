@@ -15,7 +15,7 @@ private:
 public:
     BattleShip() {
         mappa = BattleField(VOID);
-        boats = BattleField(VOID);
+        boats = BattleField();
 
         boats.placeShips(5);
 
