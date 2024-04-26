@@ -73,44 +73,5 @@ public:
         std::cout << std::endl;
         std::cout << "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n";
     }
-    /*
-   void stampa_griglia(){
-        cout << "⚝──⭒──⭑──⭒──⚝\n"; 
-        for (int i = 0; i < 3; i++) { 
-            cout << "┋ "; 
-            for (int j = 0; j < 3; j++) { 
-                cout << griglia[i][j] << " ┋ "; 
-            } 
-            cout << "\n⚝──⭒──⭑──⭒──⚝\n"; 
-        } 
-
-    }
-
-    void stampa() {
-        std::cout << "----------------- BattleField -----------------\n";
-        for (int i = 0; i < N + 2; i++) {
-            if (i == 0 || i == N + 1) {
-                // Print top and bottom external borders
-                std::cout << "+";
-                for (int k = 0; k < N; ++k)
-                    std::cout << " - ";
-                std::cout << " +" << std::endl;
-            } else {
-                // Print internal rows with borders
-                std::cout << "|";
-                for (int j = 0; j < N; j++) {
-                    if (j == 0 || j == N - 1) {
-                        // Print vertical internal borders
-                        std::cout << " " << m[i - 1][j] << " |";
-                    } else {
-                        std::cout << " " << m[i - 1][j] << " ";
-                    }
-                }
-                std::cout << std::endl;
-            }
-        }
-        std::cout << "------------------------------------------------\n";
-    }
-    */
-
+    
 };
