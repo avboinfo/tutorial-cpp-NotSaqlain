@@ -24,6 +24,17 @@ public:
 
     void play() {
 
+       while(!isGameOver()) {
+            mappa.stampa();
+
+            if (!ask()) {
+                break;
+            } 
+
+            campo.stampa();
+            
+        }
+
         /*
         // lancia 20 bombe a caso
         for (int i=0; i<20; i++) {
@@ -36,17 +47,6 @@ public:
             } else mappa.put(x,y,MISS);
         }
         */
-
-       while(!isGameOver()) {
-            mappa.stampa();
-
-            if (!ask()) {
-                break;
-            } 
-
-            campo.stampa();
-            
-        }
 
     }
 
