@@ -10,76 +10,76 @@ class BattleShip {
 
 private:
     BattleField mappa;
-    BattleField campo;
+    BattleField boats;
 
 public:
     BattleShip() {
         mappa = BattleField(VOID);
-        campo = BattleField(VOID);
-        campo.placeHorizontalShip(3);
-        campo.placeVerticalShip(4);
-        campo.placeVerticalShip(2);
-        campo.placeHorizontalShip(5);
-    }
+        boats = BattleField(VOID);
 
-    void play() {
-
-       while(!isGameOver()) {
-            mappa.stampa();
-
-            if (!ask()) {
-                break;
-            } 
-
-            campo.stampa();
-            
-        }
+        boats.placeShips(5);
 
         /*
-        // lancia 20 bombe a caso
-        for (int i=0; i<20; i++) {
-            int x = rand() % N;
-            int y = rand() % N;
-            if (campo.get(x,y)==HIT) continue;
-            if (campo.get(x,y)==SHIP) {
-                mappa.put(x,y,HIT);
-                campo.put(x,y,HIT);
-            } else mappa.put(x,y,MISS);
-        }
+        boats.placeHorizontalShip(3);
+        boats.placeVerticalShip(4);
+        boats.placeVerticalShip(2);
+        boats.placeHorizontalShip(5);
         */
-
     }
 
-    bool ask() {
-        std::cout << "Dove vuoi lanciare la bomba? (x y)";
-        int x, y;
-        std::cin >> x;
-        std::cin >> y;
+    void start() {
+        int tentativi = 0;
+        mappa.stampa();
 
-        if (x <= 0 || x >= N || y <= 0 || y >= N) {
-            std::cout << "Coordinate non valide" << std::endl;
-            return false;
-        } else {
-            x--;
-            y--;
-        }
-
-        if (campo.get(x,y)==SHIP) {
-            mappa.put(x,y,HIT);
-            campo.put(x,y,HIT);
-        } else
-            mappa.put(x,y,MISS);
-        
-        return true;
+        std::cout << "Hai 10 tentativi per colpire tutte le navi nemiche!" << std::endl;
+        do {
+            requestBombDrop();
+            mappa.stampa();
+            //boats.stampa();
+        } while(!tentativiEsauriti(++tentativi) && !isGameOver());
     }
 
     bool isGameOver() {
         for (int i=0; i<N; i++) {
             for (int j=0; j<N; j++) {
-                if (campo.get(i,j)==SHIP)
+                if (boats.get(i,j)==SHIP)
                     return false;
             }
         }
+        return true;
+    }
+
+    bool tentativiEsauriti(int tentativi) {
+        if (tentativi == 10) {
+            std::cout << "Hai esaurito i tentativi" << std::endl;
+            return true;
+        }
+        std::cout << "Tentativi rimasti: " << 10 - tentativi << std::endl;
+        return false;
+    }
+
+    bool requestBombDrop() {
+        std::cout << "Dove vuoi lanciare la bomba? ";
+        int x, y;
+        std::cin >> x;
+        std::cin >> y;
+
+        while (x <= 0 || x > N || y <= 0 || y > N) {
+            std::cout << "Coordinate non valide" << std::endl;
+            std::cout << "Dove vuoi lanciare la bomba? ";
+            std::cin >> x;
+            std::cin >> y;
+        }
+
+        x--;
+        y--;
+        
+        if (boats.get(x, y) == SHIP) {
+            mappa.put(x, y, HIT);
+            boats.put(x, y, HIT);
+        } else
+            mappa.put(x, y, MISS);
+        
         return true;
     }
 };

@@ -4,10 +4,11 @@
 using namespace std;
 
 int main() {
-
-    cout << "BATTLESHIP GAME" << endl;
+    srand(time(NULL));
+    //cout << "Hai 10 tentativi per colpire tutte le navi nemiche!" << endl;
+    cout << "------- BATTLESHIP GAME -------" << endl;
     BattleShip gioco = BattleShip();
-    gioco.play();
+    gioco.start();
     cout << "GAME OVER!" << endl;
 
 }
