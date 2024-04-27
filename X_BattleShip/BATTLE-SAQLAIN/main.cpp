@@ -12,7 +12,7 @@ bool playAgain() {
 
 int main() {
     srand(time(NULL));
-    //cout << "Hai 10 tentativi per colpire tutte le navi nemiche!" << endl;
+    //cout << "Hai 20 tentativi per colpire tutte le navi nemiche!" << endl;
     
     do {
         cout << "------- BATTLESHIP GAME -------" << endl;

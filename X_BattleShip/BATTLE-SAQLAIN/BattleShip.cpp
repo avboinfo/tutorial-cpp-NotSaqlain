@@ -31,7 +31,7 @@ public:
         int tentativi = 0;
         mappa.stampa();
 
-        std::cout << "Hai 10 tentativi per colpire tutte le navi nemiche!" << std::endl;
+        std::cout << "Hai 20 tentativi per colpire tutte le navi nemiche!" << std::endl;
         do {
             requestBombDrop();
             mappa.stampa();
@@ -50,11 +50,11 @@ public:
     }
 
     bool tentativiEsauriti(int tentativi) {
-        if (tentativi == 10) {
+        if (tentativi == 20) {
             std::cout << "Hai esaurito i tentativi" << std::endl;
             return true;
         }
-        std::cout << "Tentativi rimasti: " << 10 - tentativi << std::endl;
+        std::cout << "Tentativi rimasti: " << 20 - tentativi << std::endl;
         return false;
     }
 
